@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<style>
+.dropbtn {
+    background-color: #912CEE;
+	width: 100%;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+	width:100%;
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+	width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #8968CD}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #AB82FF;
+}
+</style>
+</head>
+<body>
+
+
+
+<div class="dropdown">
+  <button class="dropbtn">   Menu   </button>
+  <div class="dropdown-content">
+    <a href="/sensorsys/graphlasthour.html">Gráfico Geral Última Hora</a>
+    <a href="/sensorsys/tablasthour.html">Tabela Geral Última Hora</a>
+	 <a href="graphlast24.html">Gráfico Geral Últimas 24h</a>
+    <a href="tablast24.html">Tabela Geral Últimas 24h</a>
+	 <a href="graphyesterday.html">Gráfico Geral Ontem</a>
+    <a href="tabyesterday.html">Tabela Geral Ontem</a>
+	 <a href="graphtoday.html">Gráfico Geral Hoje</a>
+    <a href="tabtoday.html">Tabela Geral Hoje</a>
+  </div>
+</div>
+
+</body>
+</html>

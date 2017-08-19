@@ -1,0 +1,71 @@
+<html ng-app="AngularChartExample">
+<head>
+    <title>Sensor System</title>
+</head>
+<body>
+    <div ng-view></div>
+    <script src="chart/angular.js"></script>
+    <script src="chart/jquery.min.js" type="text/javascript"></script>
+    <script src="chart/highcharts.js"></script>
+    <script src="chart/chart.js"></script>
+    <script>
+        function MainCtrl($scope, $http){
+		
+		$scope.myhumidity = [];
+		$scope.myI = [];
+		$scope.myTemperature = [];
+		$scope.myPowerrate = [];
+		$scope.myCurrent = [];
+		$scope.myDateHour = [];
+
+	  $http.get("http://localhost:3000/sensors/last24")
+	  .then(function(response) {
+	  
+		  //$scope.myWelcome = response.data;
+		  $scope.myWelcome = response.data;
+		  
+			for (i = 0; i < response.data.length; i++) { 
+				//console.log(i+" Imprimir: " + response.data[i].dht_humidity);
+				$scope.myI[i] = i;
+				$scope.myhumidity[i] = response.data[i].dht_humidity;
+				$scope.myTemperature[i] = response.data[i].dht_temperature;
+				$scope.myPowerrate[i] = response.data[i].sct_powerrate;
+				$scope.myCurrent[i] = response.data[i].sct_current;
+				$scope.myDateHour[i] = response.data[i].dt_created;
+				console.log($scope.myhumidity[i]);
+			}
+		  //console.log("$scope.myhumidity="+myhumidity[1]);
+		  //$scope.myWelcome = response.data[0].dht_humidity;
+		  
+	  });
+		
+		
+		
+            var data = {"xData": $scope.myDateHour,"yData":[{
+                "name": "Humidade(%)",
+                "data": $scope.myhumidity
+            }, {
+                "name": "Temperatura(C)",
+                "data": $scope.myTemperature
+            }, {
+                "name": "Potência(W)",
+                "data": $scope.myPowerrate
+            }, {
+                "name": "Corrente(A)",
+                "data": $scope.myCurrent
+            }]}
+            
+            $scope.lineChartYData=data.yData
+            $scope.lineChartXData=data.xData
+        }
+    </script>
+    <script>
+    angular.module('AngularChartExample',['AngularChart'], function( $routeProvider, $locationProvider ){
+        $routeProvider.when('/',{
+            template: '<chart title="Resposta dos Sensores" xData="lineChartXData" yData="lineChartYData" xName="Month" yName="Valores" subtitle="Últimas 24 Horas"></chart>',
+            controller: MainCtrl
+            })
+    })
+    </script>
+</body>
+</html>
